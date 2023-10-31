@@ -1,27 +1,70 @@
 <%- include('../components/header',{title:"Dasboard-Laundry",auth:auth,data:data,admin:admin}) %>
-<div id="container">
-    <div id="sidebar">
+<div id="container" style="display: flex;">
+    <div id="sidebar" style="padding-right: 50px;">
         <ul id="ulside">
-            <li>ORDER INTAKE</li>
-            <li>ORDER DELIVERY</li>
-            <li>CHECK USER</li>
+            <li id="orderintakebtn">ORDER INTAKE</li>
+            <li id="orderdeliverybtn">ORDER DELIVERY</li>
+            <li id="checkuserbtn">CHECK USER</li>
         </ul>
     </div>
     <div id="rightcontent">
-        <div id="orderintake"></div>
-        <div id="orderdelivery"></div>
-        <div id="checkuser"></div>
+        <div id="orderintake">
+            <h1>orderintake</h1>
+        </div>
+        <div id="orderdelivery"><h1>orderdelivery</h1></div>
+        <div id="checkuser"><h1>checkuser</h1></div>
     </div>
 </div>
+
 <style>
     #ulside{
         list-style-type: none;
         margin: 15px;
-        padding: 15px ;
+       
 
     }
     #ulside li{
         border: solid 2px black ;
+        padding: 25px ;
+    }
+    #ulside li:hover{
+     cursor: pointer;
+     text-decoration: underline;   
+    }
+    .current{
+        font-size: large;
+        color: green;
     }
 </style>
 <%- include('../components/footer') %>
+<script>
+    $(document).ready(function(){
+        $("#orderdelivery").hide();
+        $("#checkuser").hide();
+        $("#orderintakebtn").addClass("current");
+        $("#orderintakebtn").click(function(){
+            $("#orderdelivery").hide();
+            $("#checkuser").hide();
+            $("#orderintake").show();
+            $(this).addClass("current");
+            $("#orderdeliverybtn").removeClass("current");
+            $("#checkuserbtn").removeClass("current");
+        })
+        $("#orderdeliverybtn").click(function(){
+            $("#orderdelivery").show();
+            $("#checkuser").hide();
+            $("#orderintake").hide();
+            $("#orderintakebtn").removeClass("current");
+            $(this).addClass("current");
+            $("#checkuserbtn").removeClass("current");
+        })
+        $("#checkuserbtn").click(function(){
+            $("#orderdelivery").hide();
+            $("#checkuser").show();
+            $("#orderintake").hide();
+            $("#orderintakebtn").removeClass("current");
+            $("#orderdeliverybtn").removeClass("current");
+            $(this).addClass("current");
+        })
+    })
+</script>
