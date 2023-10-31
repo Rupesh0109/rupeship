@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="assets/favicon.ico"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" >
+    <link rel="icon" href="/assets/favicon.ico">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Laundry</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="nav navbar-nav navbar-right left">
+                <% if(!auth){ %>
+                  <li class="nav-item ">
+                    <a class="nav-link" href="/login">Login/Register</a>
+                  </li>
+              <% } %>
+              <% if(auth){ %>
+                <li class="nav-item dropdown" style="padding-right: 50px;">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= data.name %>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <% if(!admin){ %>
+                    <a class="dropdown-item" href="/dashboard">Dashboard</a>  
+                      <% } %>
+                      <% if(admin){ %>
+                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                        <a class="dropdown-item" href="/admin/dashboard">Admin Dashboard</a>  
+                      <% } %>
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                  </div>
+                </li>
+            <% } %>
+            
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <style>
+        #navbarDropdownMenuLink:hover{
+          cursor: pointer;
+        }
+        .left { 
+          margin-left: auto; 
+      } 
+      </style>
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+<%- include('../components/header',{title:"Dasboard-Laundry",auth:auth,data:data,admin:admin}) %>
+<div id="container">
+    <div id="sidebar">
+        <ul id="ulside">
+            <li>ORDER INTAKE</li>
+            <li>ORDER DELIVERY</li>
+            <li>CHECK USER</li>
+        </ul>
+    </div>
+</div>
+<style>
+    #ulside{
+        list-style-type: none;
+        margin: 15px;
+        padding: 15px ;
+
+    }
+    #ulside li{
+        border: solid 2px black ;
+    }
+</style>
+<%- include('../components/footer') %>

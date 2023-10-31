@@ -1,0 +1,103 @@
+<%- include('../components/header',{title:"Dasboard-Laundry",auth:auth,data:data,admin:admin}) %>
+<% if(logged){ %>
+  <div id="myModal" class="modal1"><div class="modal-content1"><span class="close">&times;</span><p>YOU ARE ALREADY SIGNED IN AS <b><%= data.name %>,<%= data.rollno %></b></p><p>Would you want to Signout <a href="/logout">Log Out</a></p></div></div>
+<% } %>
+
+<div id="dashboard" style="padding: 25px;">
+    <h1>DASHBOARD</h1>
+    <h2>Welcome <%= data.name %></h2>
+    <h3> Your Details</h3>
+    <table class="table" id="photos">
+        <tbody>
+      
+    
+    <th scope="row"></th>
+          <%if(!admin){  %>  
+            <td>
+                <div style="height: 25%;width:25%;">
+    <img class="img-fluid" src="https://www.rajalakshmi.org/QRCode/img/<%= data.rollno %>.jpg" alt="IDCARDPhoto"><br></div></td>
+    <% } %>
+          </tr>  
+        </tbody>
+      </table>
+
+    <table class="table" id="data">
+        <tbody>
+            <th scope="row">Name</th>
+            <td><%= data.name %></td>
+          </tr>
+          <tr>
+            <th scope="row">Roll no</th>
+            <td><%= data.rollno %></td>
+          </tr> 
+          <tr>
+            <th scope="row">Unique Qr Code</th>
+            <td><img class="img-fluid" src="<%= data.qrsrc %>" alt="QRCODE"><br></td>
+          </tr> 
+        </tbody>
+      </table>
+    
+</div>
+<style>
+  .modal1 {
+      display: block; 
+      position: fixed;  
+      z-index: 1;
+      padding-top: 100px; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto;  
+      background-color: rgb(0,0,0); 
+      background-color: rgba(0,0,0,0.4); 
+    }
+    
+    /* Modal Content */
+    .modal-content1 {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+
+  #login{
+      padding-left: 25%;
+      padding-right: 25%;
+  }
+  .error{
+      border: solid 3px red;
+  }
+</style>
+<script>
+  var modal = document.getElementById("myModal");
+  var span = document.getElementsByClassName("close")[0];
+  span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+   window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+<%- include('../components/footer') %>
