@@ -1,4 +1,48 @@
-<%- include('../components/header',{title:"Order Delivery-Laundry",auth:auth,data:data,admin:admin}) %>
-<h1>CHECK USER</h1>
-<a href="/admin/dashboard">BACK TO ADMIN DASHBOARD</a>
+<%- include('../components/header',{title:"Dasboard-Admin-Laundry",auth:auth,data:data,admin:admin}) %>
+<div id="container" style="display: flex;">
+    <div id="sidebar" style="padding-right: 50px;">
+        <ul id="ulside">
+            <li id="orderintakebtn"><a href="/admin/dashboard">ORDER INTAKE</a></li>
+            <li id="orderdeliverybtn"><a href="/admin/orderdelivery">ORDER DELIVERY</a></li>
+            <li id="checkuserbtn"><a href="/admin/checkuser">CHECK USER</a></li>
+        </ul>
+    </div>
+    <div id="rightcontent">
+            <h1>Check User</h1> 
+            <form >
+                <label for="roll">Roll no:</label>
+                <input type="text" name="roll" id="roll"><br>
+                <br>
+                <button type="submit" class="btn btn-primary">SEARCH</button>
+            </form>
+            <div id="orderintakereader" style="height: 500px; width:500px"></div>
+    </div>
+</div>
+
+<style>
+    #ulside{
+        list-style-type: none;
+        margin: 15px;
+       
+
+    }
+    #ulside li{
+        border: solid 2px black ;
+        padding: 25px ;
+    }
+    #ulside li:hover{
+     cursor: pointer;
+     text-decoration: underline;   
+    }
+    .current{
+        font-size: large;
+        color: green;
+    }
+</style>
 <%- include('../components/footer') %>
+<script>
+    function changed(){
+        console.log("changed")
+    }
+</script>
+

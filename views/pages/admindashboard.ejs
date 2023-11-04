@@ -1,18 +1,16 @@
-<%- include('../components/header',{title:"Dasboard-Laundry",auth:auth,data:data,admin:admin}) %>
+<%- include('../components/header',{title:"Dasboard-Admin-Laundry",auth:auth,data:data,admin:admin}) %>
+<script src="/assets/html5-qrcode.min.js"></script>
 <div id="container" style="display: flex;">
     <div id="sidebar" style="padding-right: 50px;">
         <ul id="ulside">
-            <li id="orderintakebtn">ORDER INTAKE</li>
-            <li id="orderdeliverybtn">ORDER DELIVERY</li>
-            <li id="checkuserbtn">CHECK USER</li>
+            <li id="orderintakebtn"><a href="/admin/dashboard">ORDER INTAKE</a></li>
+            <li id="orderdeliverybtn"><a href="/admin/orderdelivery">ORDER DELIVERY</a></li>
+            <li id="checkuserbtn"><a href="/admin/checkuser">CHECK USER</a></li>
         </ul>
     </div>
     <div id="rightcontent">
-        <div id="orderintake">
-            <h1>orderintake</h1>
-        </div>
-        <div id="orderdelivery"><h1>orderdelivery</h1></div>
-        <div id="checkuser"><h1>checkuser</h1></div>
+            <h1>Order Intake</h1>
+            <div id="orderintakereader" style="height: 500px; width:500px"></div>
     </div>
 </div>
 
@@ -37,34 +35,37 @@
     }
 </style>
 <%- include('../components/footer') %>
+
 <script>
-    $(document).ready(function(){
-        $("#orderdelivery").hide();
-        $("#checkuser").hide();
-        $("#orderintakebtn").addClass("current");
-        $("#orderintakebtn").click(function(){
-            $("#orderdelivery").hide();
-            $("#checkuser").hide();
-            $("#orderintake").show();
-            $(this).addClass("current");
-            $("#orderdeliverybtn").removeClass("current");
-            $("#checkuserbtn").removeClass("current");
-        })
-        $("#orderdeliverybtn").click(function(){
-            $("#orderdelivery").show();
-            $("#checkuser").hide();
-            $("#orderintake").hide();
-            $("#orderintakebtn").removeClass("current");
-            $(this).addClass("current");
-            $("#checkuserbtn").removeClass("current");
-        })
-        $("#checkuserbtn").click(function(){
-            $("#orderdelivery").hide();
-            $("#checkuser").show();
-            $("#orderintake").hide();
-            $("#orderintakebtn").removeClass("current");
-            $("#orderdeliverybtn").removeClass("current");
-            $(this).addClass("current");
-        })
-    })
+    const scanner=new Html5QrcodeScanner("orderintakereader",{
+        qrbox:{
+            width:400,
+            height:400,
+        },
+        fps:20,
+    });
+    scanner.render(success,error)
+    function error(err){
+        console.log(err)
+    }
+    function success(result){
+        console.log(result);
+        //scanner.clear();
+    }
+
+    const scanner1=new Html5QrcodeScanner("orderdeliveryreader",{
+        qrbox:{
+            width:400,
+            height:400,
+        },
+        fps:20,
+    });
+    scanner1.render(success1,error1)
+    function error1(err){
+        console.log(err)
+    }
+    function success1(result){
+        console.log(result);
+        //scanner.clear();
+    }
 </script>
