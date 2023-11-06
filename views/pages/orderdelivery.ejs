@@ -11,6 +11,7 @@
     <div id="rightcontent">
             <h1>Order Delivery</h1>
             <div id="orderintakereader" style="height: 500px; width:500px"></div>
+            <div id="result"></div>
     </div>
 </div>
 
@@ -50,7 +51,15 @@
     }
     function success(result){
         console.log(result);
-        //scanner.clear();
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+           document.getElementById("result").innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("POST", "/orderdelivery", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("rollno="+result);
     }
 
     const scanner1=new Html5QrcodeScanner("orderdeliveryreader",{

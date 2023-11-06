@@ -9,16 +9,27 @@
     </div>
     <div id="rightcontent">
             <h1>Check User</h1> 
-            <form >
                 <label for="roll">Roll no:</label>
                 <input type="text" name="roll" id="roll"><br>
                 <br>
-                <button type="submit" class="btn btn-primary">SEARCH</button>
-            </form>
-            <div id="orderintakereader" style="height: 500px; width:500px"></div>
+                <button type="submit" id="SUBMIT" class="btn btn-primary" onclick="checkuser()">SEARCH</button>
+            <div id="result"></div>
     </div>
 </div>
-
+<script>
+    function checkuser(){
+        var xhttp = new XMLHttpRequest();
+        var rollno=document.getElementById("SUBMIT");
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+           document.getElementById("result").innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("POST", "/checkuser", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("rollno="+(document.getElementById("roll").value));
+    }
+</script>
 <style>
     #ulside{
         list-style-type: none;

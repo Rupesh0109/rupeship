@@ -11,6 +11,7 @@
     <div id="rightcontent">
             <h1>Order Intake</h1>
             <div id="orderintakereader" style="height: 500px; width:500px"></div>
+            <div id="result"></div>
     </div>
 </div>
 
@@ -49,23 +50,15 @@
         console.log(err)
     }
     function success(result){
-        console.log(result);
-        //scanner.clear();
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+           document.getElementById("result").innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("POST", "/orderintake", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("rollno="+result);
     }
 
-    const scanner1=new Html5QrcodeScanner("orderdeliveryreader",{
-        qrbox:{
-            width:400,
-            height:400,
-        },
-        fps:20,
-    });
-    scanner1.render(success1,error1)
-    function error1(err){
-        console.log(err)
-    }
-    function success1(result){
-        console.log(result);
-        //scanner.clear();
-    }
 </script>

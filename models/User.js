@@ -23,12 +23,17 @@ const userSchema = new Schema({
         type:String,
         required:true
     },
-    currentorder:{
-        type:String,
-    },
-    pastorders:[
-        
-    ]
+    orders:[{
+        day:{
+            type:Number
+        },
+        time:{
+            type:Number
+        },
+        state:{
+            type:String,
+        }}
+    ],
 
 },{timestamps:true})
 

@@ -40,7 +40,7 @@ const connectDB = async () => {
 
 app.use(session({
    secret:"key that signs the cookie",
-   resave:true,
+   resave:false,
    saveUninitialized:false,
    store:store,
 }))
@@ -66,7 +66,7 @@ const generateQR = async text => {
    try {
      return await QRCode.toDataURL(text)
    } catch (err) {
-     console.error(err)
+     console.error(err+"qrcode")
    }
  }
 //end of middleware
@@ -191,11 +191,118 @@ app.post('/login',async(req,res)=>{
    res.redirect("/dashboard")
 }
 catch(error){
-   console.log(error.message)
+   console.log(error.message+"login")
 }
   
 })
 
+
+
+app.post("/orderintake" ,async(req,res)=>{
+const{rollno}=req.body;
+console.log(rollno)
+const user =await UserModel.findOne({"rollno":rollno})
+if(!user){
+   return res.send("USER NOT FOUND")
+}
+const d = new Date();
+let day = d.getDay();
+// let day=1
+var k=new Date();
+k.setHours(0,0,0,0);
+k=k.getTime()
+
+
+if(user.orders.length==0){
+console.log("if")
+user.orders.push({
+day:day,
+time:k,
+state:"Processing"
+})
+user.save();
+return res.send(`Order intake success for ${rollno}`)
+}
+// else if
+
+else if(user.orders[user.orders.length-1].state=="Delivered"){
+   let days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+   if(user.orders[user.orders.length-1].day==day){
+      if(k-user.orders[user.orders.length-1].time<(24*7*60*60*1000)){
+         return res.send(`Order cannot be created previous order created on ${days[user.orders[user.orders.length-1].day]}`)  
+      }
+      console.log("else if")
+      user.orders.push({
+         day:day,
+         state:"Processing",
+         time:k
+         })
+         user.save();
+         return res.send(`Order intake success for ${rollno}`)
+   }
+   else{
+      return res.send(`Order cannot be created previous order created on ${days[user.orders[user.orders.length-1].day]}`)
+
+   }
+}
+else{
+   return res.send("Already previous order is in processing")
+}
+ 
+
+})
+
+app.post("/orderdelivery",async(req,res)=>{
+   const{rollno}=req.body;
+   const db=await UserModel.findOne({"rollno":rollno})
+   if(!db){
+     return res.send("USER NOT FOUND")
+   }
+   if(db.orders.length==0){
+      return res.send("there is no orders in this account")
+   }
+   if(db.orders[db.orders.length-1].state=="Delivered"){
+      return res.send("there are no active orders ,all the previous orders are delivered")
+   }
+   db.orders[db.orders.length-1].state="Delivered"
+   db.save();
+  
+   
+   return res.send(`STATUS UPDATED AS DELIVERED FOR ${rollno}`);
+
+})
+app.post("/checkuser",async(req,res)=>{
+   const{rollno}=req.body;
+   if(rollno==""){
+      return res.send("EMPTY!!!!")
+   }
+   const data=await UserModel.findOne({"rollno":rollno})
+   if(!data){
+      return res.send("USER NOT EXIST")
+   }
+  
+   return res.send(`<table class="table" id="data">
+   <tbody>
+      <tr>
+       <th scope="row">Name</th>
+       <td>${data.name} </td>
+     </tr>
+     <tr>
+       <th scope="row">Roll no</th>
+       <td>${data.rollno}</td>
+     </tr> 
+     <tr>
+       <th scope="row">Unique Qr Code</th>
+       <td><img class="img-fluid" src="${data.qrsrc}" alt="QRCODE"><br></td>
+     </tr> 
+     <tr>
+     <th scope="row">PHOTO</th>
+     <td style="height:150px;width:150px"> <img class="img-fluid" src="https://www.rajalakshmi.org/QRCode/img/${data.rollno}.jpg" alt="IDCARDPhoto"><br></div></td>
+     <br></td>
+   </tr> 
+   </tbody>
+ </table>`)
+ })
 //end of form handling
 
 //logout

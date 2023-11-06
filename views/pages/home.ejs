@@ -1,12 +1,61 @@
 <%- include('../components/header',{title:'Laundry-Homepage',auth:auth,data:data,admin:admin});%>
-<h1>HOMEPAGE</h1>
 <% if(logout){ %>
     <div id="myModal" class="modal1"><div class="modal-content1"><span class="close">&times;</span><p>Logout Sucessful</p></div></div>
 <% } %>
 <% if(admincheck){ %>
     <div id="myModal" class="modal1"><div class="modal-content1"><span class="close">&times;</span><p>You are not allowed to view that!!</p></div></div>
 <% } %>
+
+<section class="home-testimonial">
+  <div class="container-fluid">
+      <div class="row d-flex justify-content-center testimonial-pos">
+          <div class="col-md-12 pt-4 d-flex justify-content-center">
+              <h3>Testimonials</h3>
+          </div>
+          <div class="col-md-12 d-flex justify-content-center">
+              <h2>Explore the students experience of Laundry</h2>
+          </div>
+      </div>
+      <section class="home-testimonial-bottom">
+          <div class="container testimonial-inner">
+              <div class="row d-flex justify-content-center">
+                  <div class="col-md-4 style-3">
+                      <div class="tour-item ">
+                          <div class="tour-desc bg-white">
+                              <div class="tour-text color-grey-3 text-center">&ldquo;THE WEBSITE IS EASY TO USE &rdquo;</div>
+                              <div class="link-name d-flex justify-content-center">Student</div>
+                              <div class="link-position d-flex justify-content-center">-REC</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4 style-3">
+                      <div class="tour-item ">
+                        <div class="tour-item ">
+                          <div class="tour-desc bg-white">
+                              <div class="tour-text color-grey-3 text-center">&ldquo;IT SAVES SO MUCH TIME &rdquo;</div>
+                              <div class="link-name d-flex justify-content-center">Student</div>
+                              <div class="link-position d-flex justify-content-center">-REC</div>
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4 style-3">
+                      <div class="tour-item ">
+                        <div class="tour-desc bg-white">
+                          <div class="tour-text color-grey-3 text-center">&ldquo;WE CAN EASILY CHECK THE STATUS OF OUR ORDER USING THE DASHBOARD &rdquo;</div>
+                          <div class="link-name d-flex justify-content-center">Student</div>
+                          <div class="link-position d-flex justify-content-center">-REC</div>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+      </section>
+</section>
+
+
+
 <style>
+  .home-testimonial{background-color: #231834;height: 380px}.home-testimonial-bottom{background-color: #f8f8f8;transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;margin-top: 20px;margin-bottom: 0px;position: relative;height: 130px;top: 190px}.home-testimonial h3{color: var(--orange);font-size: 14px;font-weight: 500;text-transform: uppercase}.home-testimonial h2{color: white;font-size: 28px;font-weight: 700}.testimonial-inner{position: relative;top: -174px}.testimonial-pos{position: relative;top: 24px}.testimonial-inner .tour-desc{border-radius: 5px;padding: 40px}.color-grey-3{font-family: "Montserrat", Sans-serif;font-size: 14px;color: #6c83a2}.testimonial-inner img.tm-people{width: 60px;height: 60px;-webkit-border-radius: 50%;border-radius: 50%;-o-object-fit: cover;object-fit: cover;max-width: none}.link-name{font-family: "Montserrat", Sans-serif;font-size: 14px;color: #6c83a2}.link-position{font-family: "Montserrat", Sans-serif;font-size: 12px;color: #6c83a2}
     .modal1 {
         display: block; 
         position: fixed;  
