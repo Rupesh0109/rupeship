@@ -49,14 +49,15 @@
     <% for(let i=data.orders.length-1;i>=0;i--){ %>
       <div class="card" style="width: 18rem;margin-bottom:15px">
         <div class="card-body">
-          <h5 class="card-title"><%=((data.orders[0].state))%></h5>
-          <p class="card-text"><%=(days[data.orders[0].day])%></p>
-          <% var d= new Date(data.orders[0].time) %>
+          <h5 class="card-title"><%=((data.orders[i].state))%></h5>
+          <p class="card-text"><%=(days[data.orders[i].day])%></p>
+          <% var d= new Date(data.orders[i].time) %>
           <p class="card-text"><%=(d.toString().substring(4,15))%></p>
         </div>
       </div>
       <% } %>
   <% } %>
+  
 
 
 </div>
