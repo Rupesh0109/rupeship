@@ -1,4 +1,4 @@
-<%- include('../components/header',{title:"Login-Laundry",auth:auth,data:data,admin:admin}) %>
+<%- include('Header.ejs',{title:"Login-Laundry",auth:auth,data:data,admin:admin}) %>
 
 <form id="login" method="post" action="/login" onsubmit="return validateform()">
     <div class="mb-3">
@@ -127,4 +127,4 @@
         return isValid
     }
   </script>
-<%- include('../components/footer') %>
+<%- include('Footer.ejs') %>

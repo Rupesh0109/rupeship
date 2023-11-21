@@ -1,4 +1,4 @@
-<%- include('../components/header',{title:'Register-Laundry',auth:auth,data:data,admin:admin});%>
+<%- include('Header.ejs',{title:'Register-Laundry',auth:auth,data:data,admin:admin});%>
 <div id="register">
 <h1>Register Page</h1>
 <form method="post" action="register" onsubmit="return validateregister()">
@@ -198,4 +198,4 @@ function validateconfirmpassword(){
         return isValid
     }
 </script>
-<%- include('../components/footer') %>
+<%- include('Footer.ejs') %>

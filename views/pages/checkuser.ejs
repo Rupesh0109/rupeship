@@ -1,4 +1,4 @@
-<%- include('../components/header',{title:"Dasboard-Admin-Laundry",auth:auth,data:data,admin:admin}) %>
+<%- include('Header.ejs',{title:"Dasboard-Admin-Laundry",auth:auth,data:data,admin:admin}) %>
 <div id="container" style="display: flex;">
     <div id="sidebar" style="padding-right: 50px;">
         <ul id="ulside">
@@ -50,7 +50,7 @@
         color: green;
     }
 </style>
-<%- include('../components/footer') %>
+<%- include('Footer.ejs') %>
 <script>
     function changed(){
         console.log("changed")
