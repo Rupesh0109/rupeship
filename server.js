@@ -198,7 +198,7 @@ catch(error){
 
 
 
-app.post("/orderintake" ,async(req,res)=>{
+app.post("/orderintake" ,isAdmin,async(req,res)=>{
 const{rollno}=req.body;
 console.log(rollno)
 const user =await UserModel.findOne({"rollno":rollno})
@@ -252,7 +252,7 @@ else{
 
 })
 
-app.post("/orderdelivery",async(req,res)=>{
+app.post("/orderdelivery",isAdmin,async(req,res)=>{
    const{rollno}=req.body;
    const db=await UserModel.findOne({"rollno":rollno})
    if(!db){
@@ -271,7 +271,7 @@ app.post("/orderdelivery",async(req,res)=>{
    return res.send(`STATUS UPDATED AS DELIVERED FOR ${rollno}`);
 
 })
-app.post("/checkuser",async(req,res)=>{
+app.post("/checkuser",isAdmin,async(req,res)=>{
    const{rollno}=req.body;
    if(rollno==""){
       return res.send("EMPTY!!!!")
